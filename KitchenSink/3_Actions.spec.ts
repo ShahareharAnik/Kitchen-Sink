@@ -205,6 +205,7 @@ test('Actions', async ({ page }) => {
         await actionInputHidden.clear()
         await expect(actionInputHidden).toHaveValue('')
         console.log("   The input field is now empty")
+        await page.waitForTimeout(500);
         await rightckichbox.click()
 
     }catch(error){

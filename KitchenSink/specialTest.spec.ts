@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
     await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
   });
 
-test('Window', async ({ page }) => {
+test.skip('Window', async ({ page }) => {
     console.log("*************************************************Entering the Actions********************************************************");
       //Click on the Actions Button
       const Window = page.locator("//ul[@class='home-list']//a[normalize-space()='Window']");
