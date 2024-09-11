@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Window', async ({ page }) => {
 
-    console.log("*************************************************Entering the Querying********************************************************");
+    console.log("*************************************************Entering the Window********************************************************");
 
     //Click on the Querying Button
     const Window = page.locator("//ul[@class='home-list']//a[normalize-space()='window']");
@@ -55,6 +55,6 @@ test('Window', async ({ page }) => {
 
 
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
 
 })
