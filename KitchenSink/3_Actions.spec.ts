@@ -87,6 +87,7 @@ test('Actions', async ({ page }) => {
     const previousSibling = focusElement.locator('xpath=preceding-sibling::*').first();
     // Focus on the element
     await focusElement.focus();
+    await focusElement.type("123456789",{delay:100})
     try{
         // Assert that the element has the class 'focus'
         await expect(focusElement).toHaveClass(/focus/);
@@ -139,24 +140,8 @@ test('Actions', async ({ page }) => {
     const actionButton = page.locator('.action-btn')
     actionButton.click()
     await page.waitForTimeout(2000);
-
     const canvas = page.locator('#action-canvas');
 
-    const boundingBox = await canvas.boundingBox();
-    if (boundingBox) {
-        // Click at specific positions
-        await canvas.click({ position: { x: 0, y: 0 } });  // topLeft
-        await canvas.click({ position: { x: boundingBox.width / 2, y: 0 } });  // top
-        await canvas.click({ position: { x: boundingBox.width, y: 0 } });  // topRight
-        await canvas.click({ position: { x: 0, y: boundingBox.height / 2 } });  // left
-        await canvas.click({ position: { x: boundingBox.width, y: boundingBox.height / 2 } });  // right
-        await canvas.click({ position: { x: 0, y: boundingBox.height } });  // bottomLeft
-        await canvas.click({ position: { x: boundingBox.width / 2, y: boundingBox.height } });  // bottom
-        await canvas.click({ position: { x: boundingBox.width, y: boundingBox.height } });  // bottomRight
-    } else {
-        console.error('Failed to get bounding box of the element.');
-    }
-    await page.waitForTimeout(2000);
 
     // Click at specific coordinates
     await canvas.click({ position: { x: 80, y: 75 } });
@@ -168,8 +153,13 @@ test('Actions', async ({ page }) => {
     await canvas.click({ position: { x: 170, y: 165 } });
 
     // Click multiple elements
-    // const labels = page.locator('.action-labels>.label');
-    // await labels.evaluateAll(elements => elements.forEach(el => el.click()));
+    console.log("9. Click multiple elements")
+    const labels = page.locator("//div//span[@class='label label-primary']");
+    const labelCount = await labels.count();
+    for (let i = 0; i < labelCount; i++) {
+    await labels.nth(i).click();
+    await page.waitForTimeout(100);
+}
             
     await page.waitForTimeout(5000);
     
