@@ -7,23 +7,76 @@ test.beforeEach(async ({ page }) => {
     await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
   });
 
-test('Actions', async ({ page }) => {
+test('Window', async ({ page }) => {
     console.log("*************************************************Entering the Actions********************************************************");
       //Click on the Actions Button
-      const Querying = page.locator("//ul[@class='home-list']//a[normalize-space()='Actions']");
+      const Window = page.locator("//ul[@class='home-list']//a[normalize-space()='Window']");
       try{
-          await expect(Querying).toBeVisible();
+          await expect(Window).toBeVisible();
           console.log('The  Actions Button is Visiable')
       }catch(error){
           console.log('The Actions Button is not  Visiable', error)
       }
-      await Querying.click();
+      await Window.click();
  
-       const scrollview = page.locator("//a[contains(text(),'cy.scrollTo()')]")
-       await scrollview.scrollIntoViewIfNeeded();
+    //    const scrollview = page.locator("//a[contains(text(),'cy.scrollTo()')]")
+    //    await scrollview.scrollIntoViewIfNeeded();
       await page.waitForTimeout(2000); 
 
+      // Access the document's charset property
+  const charset = await page.evaluate(() => document.charset);
 
+  // Perform the assertion
+  expect(charset).toBe('UTF-8');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //        // Access the global window object and assert properties
+// //   const windowTop = await page.evaluate(() => window.top);
+
+// //   // Perform the assertion
+// //   try{
+// //   expect(windowTop).toBe(window);
+// //   }catch(error){
+// //     console.error("an error : ", error)
+// //   }
+
+// /// Access the global window object and assert properties
+// const windowTop = await page.evaluate(() => window.top);
+
+// // Perform the assertion inside the evaluate method, where `window` is defined
+// try {
+//   await page.evaluate((windowTop) => {
+//     if (windowTop !== window) {
+//       throw new Error('windowTop is not equal to window');
+//     }
+//   }, windowTop);
+// } catch (error) {
+//   console.error("An error occurred: ", error);
+// }
 
         // Scroll to the bottom of the page
     //await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -49,17 +102,17 @@ test('Actions', async ({ page }) => {
                                 // }
 
                             // Smooth scrolling
-                            await page.evaluate(() => {
-                                document.querySelector("h4[id='trigger'] a")?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-                            });
+                            // await page.evaluate(() => {
+                            //     document.querySelector("h4[id='trigger'] a")?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                            // });
 
                             // Set the value directly
-await page.locator('.trigger-input-range').fill('25');
+// await page.locator('.trigger-input-range').fill('25');
 
-// Verify the displayed value (assuming there's an element showing the value)
-await page.locator('.trigger-input-range + p').evaluate(el => el.textContent).then(textContent => {
-  expect(textContent).toBe('25');
-});
+// // Verify the displayed value (assuming there's an element showing the value)
+// await page.locator('.trigger-input-range + p').evaluate(el => el.textContent).then(textContent => {
+//   expect(textContent).toBe('25');
+// });
 
 
     //   //Select Option
