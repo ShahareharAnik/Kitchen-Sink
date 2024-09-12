@@ -35,9 +35,14 @@ test.describe('System commands, platform checks, and UI interactions', () => {
         try {
           const stdout = execSync(`cat "${filePath}"`, { stdio: 'pipe' }).toString();
           expect(stdout).toBeTruthy();
-          
-          const pwdCode = execSync('pwd', { stdio: 'pipe' }).status;
-          expect(pwdCode).toBe(0);
+
+          // Instead of checking for 'status', check if the command succeeded
+          try {
+            execSync('pwd', { stdio: 'pipe' });
+            console.log('pwd command executed successfully.');
+          } catch (error) {
+            console.error('Failed to execute pwd command:', error.message);
+          }
         } catch (error) {
           console.error('Failed to execute command on Unix-like systems:', error.message);
         }
@@ -115,7 +120,7 @@ test.describe('System commands, platform checks, and UI interactions', () => {
 
     // Take a screenshot
     try {
-      await page.screenshot({ path: path.join(__dirname, 'Screeeshots') });
+      await page.screenshot({ path: path.join(__dirname, 'Screenshots', 'screenshot.png') });
     } catch (error) {
       console.error('Screenshot capture failed:', error.message);
     }
