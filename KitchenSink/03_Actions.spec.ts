@@ -194,7 +194,6 @@ test('Actions', async ({ page }) => {
     console.log("11.Right Click Check")
     const RightactionDiv = page.locator('.rightclick-action-div');
     await RightactionDiv.click({ button: 'right' });
-    const rightckichbox = page.locator("//body[1]/div[2]/div[1]/div[1]/div[23]/div[1]")
     const actionInputHidden = page.locator('.rightclick-action-input-hidden');
     try{
         await expect(RightactionDiv).toBeHidden();
@@ -206,8 +205,7 @@ test('Actions', async ({ page }) => {
         await expect(actionInputHidden).toHaveValue('')
         console.log("   The input field is now empty")
         await page.waitForTimeout(500);
-        await rightckichbox.click()
-
+        
     }catch(error){
         console.error("An error occer : ", error)
     }
