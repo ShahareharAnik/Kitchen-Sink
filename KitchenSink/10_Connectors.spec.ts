@@ -85,6 +85,26 @@ test('Connectors', async ({ page }) => {
     }
 
 
+
+    //check list items and their content
+    console.log("5. check list items and their content")
+    // Locate the list items
+    const ChecklistItems = await page.locator('.connectors-list > li').elementHandles();
+     // Check the text content of each item
+     const texts = await Promise.all(ChecklistItems.map(async (item) => await item.textContent()));
+    // Assertions
+    try{
+        expect(ChecklistItems.length).toBe(3);
+        console.log("   Checked the length of the list")
+        expect(texts[0]).toContain('Walk the dog');
+        expect(texts[1]).toContain('Feed the cat');
+        expect(texts[2]).toContain('Write JavaScript');
+    }catch(error){
+        console.log("   An error occer : ", error);
+    }
+
+
+
     await page.waitForTimeout(3000)
 
 }) 
