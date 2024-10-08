@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
 
 test('Aliasing', async ({ page }) => {

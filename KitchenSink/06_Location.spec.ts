@@ -1,25 +1,19 @@
 import { test, expect } from '@playwright/test';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
 
 test('Location', async ({ page }) => {
 
     console.log("*************************************************Location the Querying********************************************************");
-
-    // Click on the Querying Button
-    const Location = page.locator("//ul[@class='home-list']//a[normalize-space()='Location']");
-    try {
-        await expect(Location).toBeVisible();
-        console.log('The Location Button is Visible');
-    } catch (error) {
-        console.log('The Location Button is not Visible', error);
-    }
-    await Location.click();
+    const kitchenSink = new KitchenSink(page)
+    // Click on the Location Button
+    kitchenSink.gotoLocation();
 
     // Location properties
     console.log("1. URL Location properties");

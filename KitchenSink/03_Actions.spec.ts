@@ -1,28 +1,23 @@
 import { test, expect } from '@playwright/test';
 import { Console } from 'console';
 import exp from 'constants';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+import { KeyObject } from 'crypto';
+
+
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://example.cypress.io/');
-  
-    // Expect a title "to contain" a substring.
-    await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
-  });
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
+});
+
 
 test('Actions', async ({ page }) => {
     console.log("*************************************************Entering the Actions********************************************************");
+    const kitchenSink = new KitchenSink(page)
 
      //Click on the Actions Button
-     const Querying = page.locator("//ul[@class='home-list']//a[normalize-space()='Actions']");
-     try{
-         await expect(Querying).toBeVisible();
-         console.log('The  Actions Button is Visiable')
-     }catch(error){
-         console.log('The Actions Button is not  Visiable', error)
-     }
-     await Querying.click();
-
-     
+     kitchenSink.gotoActions(); 
 
     //Basic typing
     console.log("1. Basic typing")

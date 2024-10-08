@@ -1,30 +1,19 @@
 import { test, expect } from '@playwright/test';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
+
 
 test('Traversal', async ({ page }) => {
   console.log("*************************************************Entering the Traversal********************************************************");
-
+  const kitchenSink = new KitchenSink(page)
   // Click on the Traversal Button
-  const Traversal = page.locator("//ul[@class='home-list']//a[normalize-space()='Traversal']");
-  
-    try {
-        console.log("1. Check if the Traversal button is visible...");
-        const isVisible = await Traversal.isVisible();
-        if (isVisible) {
-            console.log("   The Traversal Button is found");
-            await Traversal.click();
-        } else {
-            console.log("   The Traversal Button is not visible");
-        }
-    } catch (error) {
-            console.error("   Error finding or clicking the Traversal button:", error);
-    }
+  kitchenSink.gotoTraversal();
 
 
   // Check the children in the API

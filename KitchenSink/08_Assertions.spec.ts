@@ -1,25 +1,19 @@
 import { test, expect } from '@playwright/test';
 import * as assert from 'assert';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
 
 test('Assertions', async ({ page }) => {
     console.log("*************************************************Entering the Assertions********************************************************");
-
+    const kitchenSink = new KitchenSink(page)
     // Click on the Assertions Button
-    const Assertions = page.locator("//ul[@class='home-list']//a[normalize-space()='Assertions']");
-    try {
-        await expect(Assertions).toBeVisible();
-        console.log('The Assertions Button is Visible');
-    } catch (error) {
-        console.log('The Assertions Button is not Visible', error);
-    }
-    await Assertions.click();
+    kitchenSink.gotoAssertions();
 
     // Go For Implicit Assertions
     console.log("1. Go For Implicit Assertions");

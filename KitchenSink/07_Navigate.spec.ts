@@ -1,26 +1,19 @@
 import { test, expect } from '@playwright/test';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
 
 test('Navigation', async ({ page }) => {
-
+    const kitchenSink = new KitchenSink(page)
     console.log("*************************************************Location the Navigation********************************************************");
-
+    
     // Click on the Navigation Button
-    console.log("1. Click on the Navigation Button")
-    const Navigation = page.locator("//ul[@class='home-list']//a[normalize-space()='Navigation']");
-    try {
-        await expect(Navigation).toBeVisible();
-        console.log('   The Navigation Button is Visible');
-    } catch (error) {
-        console.log('   The Navigation Button is not Visible', error);
-    }
-    await Navigation.click();
+    kitchenSink.gotoNavigation();
 
     //Go Back 
     console.log("2. Go back to the main page")

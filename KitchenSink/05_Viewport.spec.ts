@@ -1,28 +1,19 @@
 import { test, expect } from '@playwright/test';
+import {  KitchenSink } from './Pages/KitchenSinkPage';
+
+
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://example.cypress.io/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle('Cypress.io: Kitchen Sink');
+    const kitchenSink = new KitchenSink(page)
+    kitchenSink.gotoKitchenSink(page);
 });
 
 test('Viewport', async ({ page }) => {
 
     console.log("*************************************************Entering the Viewport********************************************************");
-
+    const kitchenSink = new KitchenSink(page)
     //Click on the Querying Button
-    const Viewport = page.locator("//ul[@class='home-list']//a[normalize-space()='Viewport']");
-    try{
-        await expect(Viewport).toBeVisible();
-        console.log('The  Viewport Button is Visiable')
-    }catch(error){
-        console.log('The Viewport Button is not  Visiable', error)
-    }
-    await Viewport.click();
-
-
-
+    kitchenSink.gotoViewport();
     // Set the viewport size to 320x480
     await page.setViewportSize({ width: 320, height: 480 });
     await page.waitForTimeout(2000);
